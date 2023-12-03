@@ -96,17 +96,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // 右键点地板移动
-        if (Input.GetMouseButtonDown(1))
-        {
-            state = State.Walk;
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (mousePosition.x > moveMinRange && mousePosition.x < moveMaxRange)
-                m_targetPos = mousePosition;
-        }
+        RightClickMove();
+        HandleTouchInput();
 
         // 饱食度不足时
-        if(Statistics.Instance.Satiety <= 0)
+        if (Statistics.Instance.Satiety <= 0)
         {
             m_currentSpeed = Speed / 2;
             anim.speed = 0.5f;
@@ -119,6 +113,8 @@ public class Player : MonoBehaviour
             audioSource.pitch = 1f;
         }
     }
+
+
 
     private void FixedUpdate()
     {
@@ -133,6 +129,42 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
+
+    #region 手机
+
+    private Vector2 touchStartPos; // 记录触摸开始位置
+    private float lastTapTime; // 上一次点击的时间
+    private float doubleTapTimeThreshold = 0.3f; // 双击时间间隔的阈值
+
+    void HandleTouchInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    touchStartPos = touch.position;
+
+                    // 计算两次点击之间的时间间隔
+                    float timeSinceLastTap = Time.time - lastTapTime;
+                    lastTapTime = Time.time;
+
+                    // 如果时间间隔小于阈值，认为是双击
+                    if (timeSinceLastTap < doubleTapTimeThreshold)
+                    {
+                        state = State.Walk;
+                        Vector2 touchWorldPos = Camera.main.ScreenToWorldPoint(touch.position);
+                        if (touchWorldPos.x > moveMinRange && touchWorldPos.x < moveMaxRange)
+                            m_targetPos = touchWorldPos;
+                    }
+                    break;
+            }
+        }
+    }
+
+    #endregion
 
     #region Public
 
@@ -307,6 +339,19 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Move
+
+    private void RightClickMove()
+    {
+        // 右键点地板移动
+        if (Input.GetMouseButtonDown(1))
+        {
+            state = State.Walk;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (mousePosition.x > moveMinRange && mousePosition.x < moveMaxRange)
+                m_targetPos = mousePosition;
+        }
+    }
+
     private void Flip()
     {
         float dir = m_lastTransfrom.x - transform.position.x;

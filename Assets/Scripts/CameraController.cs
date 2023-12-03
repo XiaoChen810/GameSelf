@@ -13,11 +13,16 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public bool Lock;
 
+    // 手机移动镜头方式
+    private Vector2 touchStartPos; // 记录触摸开始位置
+    public float dragSpeed = 2f; // 调整拖动移动的速度
+
     void Update()
     {
         if (!Lock)
         {
             MoveCameraWithMouse();
+            HandleTouchInput();
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -64,6 +69,38 @@ public class CameraController : MonoBehaviour
 
         // 移动相机
         transform.position += moveDirection.normalized * dynamicScrollSpeed * Time.deltaTime;
+    }
+
+    void HandleTouchInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    touchStartPos = touch.position;
+                    break;
+                case TouchPhase.Moved:
+                    Vector2 deltaPos = touch.position - touchStartPos;
+                    MoveCamera(-deltaPos.x);
+                    touchStartPos = touch.position;
+                    break;
+            }
+        }
+    }
+
+    void MoveCamera(float deltaHorizontal)
+    {
+        Vector3 moveDirection = new Vector3(deltaHorizontal, 0f, 0f);
+        Vector3 newPosition = transform.position + moveDirection * dragSpeed * Time.deltaTime;
+
+        // 限制摄像机在X轴上的移动范围
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+
+        // 移动摄像机
+        transform.position = newPosition;
     }
 
     private void OnEnable()
