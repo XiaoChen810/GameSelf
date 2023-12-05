@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     private float m_currentSpeed;
     [HideInInspector] public Vector2 m_targetPos;
     private Vector3 m_lastTransfrom;
-    private bool m_forcedDirOpen;
     private float m_forcedDir;
 
     public enum State
@@ -55,6 +54,11 @@ public class Player : MonoBehaviour
     public float moveMinRange = -40;
     public float moveMaxRange = 2;
 
+    // 是否在室内
+    [HideInInspector] public bool isIndoor;
+    // 是否开启强制方向转换
+    private bool m_forcedDirOpen;   
+
     public delegate void OnReachThere();
 
     private void Awake()
@@ -83,10 +87,17 @@ public class Player : MonoBehaviour
 
     private void DateDark()
     {
+        // 位置变回初始位置
         transform.position = InitPosition;
+        // 状态改成空
         state = State.None;
+        // 重置目标位置
         m_targetPos = transform.position;
         m_lastTransfrom = transform.position;
+        // 重置在室外
+        isIndoor = false;
+        // 强制面向右边
+        UseForcedFlip(1,0.1f,State.None);
     }
 
     private void OnDestroy()
@@ -192,7 +203,7 @@ public class Player : MonoBehaviour
                 if(distance < 0.1)
                 {
                     callback();
-                    break;
+                    yield break;
                 }
             }
             else
@@ -205,7 +216,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 强制转向一段时间，当状态发生改变时取消
     /// </summary>
-    /// <param name="dir"></param>      方向
+    /// <param name="dir"></param>      方向,1为正。
     /// <param name="time"></param>     持续时间
     /// <param name="state"></param>    目标状态
     public void UseForcedFlip(float dir, float time, State state)
@@ -293,7 +304,6 @@ public class Player : MonoBehaviour
     /// 家
     /// </summary>
 
-    [HideInInspector] public bool isIndoor;
     public void EnterIndoor()
     {
         Statistics.Instance.anim.SetTrigger("SceneLoaded");

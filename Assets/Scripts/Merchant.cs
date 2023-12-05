@@ -78,14 +78,18 @@ public class Merchant : MonoBehaviour
 
     private void GoodsUpdate(Goods goods)
     {
+        // 随机新的图片，数量，价格
         goods.Image.sprite = goodsSpriteList[Random.Range(0, goodsSpriteList.Count)];
         goods.num = Random.Range(goodsMinCount, goodsMaxCount);
         goods.price = (int)(Random.Range(goodsMinPrice, goodsMaxPrice) * goodsDiscount);
 
+        // 更新新的图片，数量，价格
         goods.Name = goodsDict[goods.Image.sprite];
         goods.Number.text = goods.num.ToString();
         goods.Price.text = goods.price.ToString();
 
+        goods.isBuy = false;
+        goods.gameObject.SetActive(true);
     }
 
     private void OnDestroy()

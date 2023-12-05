@@ -21,7 +21,8 @@ public class Statistics : MonoBehaviour
 
     public Animator anim;
 
-    [Header("基本数据")]
+    [Header("基本数据面板")]
+    [SerializeField] private StatisticsPanel statisticsPanel;
     [Header("金币")]
     [SerializeField] private float _gold;
     public float Gold
@@ -39,27 +40,100 @@ public class Statistics : MonoBehaviour
                     audioSource.PlayOneShot(GoldClip);
             }
             _gold = value;
+            statisticsPanel.Gold.text = _gold.ToString();
             OnGoldUpdate?.Invoke(_gold);
         }
 
     }
 
     [Header("木头")]
-    public float Wood;
+    [SerializeField] private float _wood;
+    public float Wood
+    {
+        get
+        {
+            return _wood;
+        }
+        set
+        {
+            _wood = value;
+            statisticsPanel.Wood.text = _wood.ToString();
+        }
+    }
+
     [Header("铁")]
-    public float Iron;
+    [SerializeField] private float _iron;
+    public float Iron
+    {
+        get
+        {
+            return _iron;
+        }
+        set
+        {
+            _iron = value;
+            statisticsPanel.Iron.text = _iron.ToString();
+        }
+    }
+
     [Header("金砖")]
-    public float Brics;
+    [SerializeField] private float _brics;
+    public float Brics
+    {
+        get
+        {
+            return _brics;
+        }
+        set
+        {
+            _brics  = value;
+            statisticsPanel.Brics.text = _brics.ToString();
+        }
+    }
 
     [Header("饱食度")]
-    public float Satiety;
+    [SerializeField] private float _satiety;
+    public float Satiety
+    {
+        get
+        {
+            return _satiety;
+        }
+        set
+        {
+            _satiety = value;
+            statisticsPanel.Satiety.value = _satiety / SatietyMax;
+        }
+    }
     public float SatietyMax;
+
     [Header("精力")]
-    public float Energy;
+    [SerializeField] private float _energy;
+    public float Energy
+    {
+        get { return _energy; }
+        set
+        {
+            _energy = value;
+            statisticsPanel.Energy.value = _energy / EnergyMax;
+        }
+    }
     public float EnergyMax;
 
     [Header("天数")]
-    public float Date;
+    [SerializeField] private float _date;
+    public float Date
+    {
+        get
+        {
+            return _date;
+        }
+        set
+        {
+            _date = value;
+            statisticsPanel.Date.text = $"Date: {Date}";
+        }
+    }
     private float LastDate;
     [Min(10)]public float TimeScale = 60;
     // 6~14~19~24~6

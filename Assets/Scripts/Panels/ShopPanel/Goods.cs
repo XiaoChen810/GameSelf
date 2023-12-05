@@ -12,6 +12,7 @@ public class Goods : MonoBehaviour
     public Text Price;
     public Button button;
     public int num,price;
+    public bool isBuy;
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class Goods : MonoBehaviour
 
         Statistics.Instance.Cost(price);
         gameObject.SetActive(false);
+        isBuy = true;
     }
 }
 

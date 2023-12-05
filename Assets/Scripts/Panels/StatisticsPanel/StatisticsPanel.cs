@@ -8,7 +8,7 @@ public class StatisticsPanel : MonoBehaviour
     [Header("½ð±Ò")]
     public Text Gold;
     [Header("Ä¾Í·")]
-    public Text Wooden;
+    public Text Wood;
     [Header("Ìú")]
     public Text Iron;
     [Header("½ð×©")]
@@ -30,13 +30,13 @@ public class StatisticsPanel : MonoBehaviour
 
     private void Update()
     {
-        Statistics statistics = Statistics.Instance;
-        Gold.text = statistics.Gold.ToString();
-        Wooden.text = statistics.Wood.ToString();
-        Iron.text = statistics.Iron.ToString();
-        Brics.text = statistics.Brics.ToString();
-        Satiety.value = statistics.Satiety / statistics.SatietyMax;
-        Energy.value = statistics.Energy / statistics.EnergyMax;
-        Date.text = $"Date: {statistics.Date.ToString()}";
+        //Statistics statistics = Statistics.Instance;
+        //Gold.text = statistics.Gold.ToString();
+        //Wood.text = statistics.Wood.ToString();
+        //Iron.text = statistics.Iron.ToString();
+        //Brics.text = statistics.Brics.ToString();
+        //Satiety.value = statistics.Satiety / statistics.SatietyMax;
+        //Energy.value = statistics.Energy / statistics.EnergyMax;
+        //Date.text = $"Date: {statistics.Date.ToString()}";
     }
 }

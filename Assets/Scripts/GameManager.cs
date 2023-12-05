@@ -296,7 +296,7 @@ public class GameManager : MonoBehaviour
 
     #region Event
 
-    public bool ShowEvent()
+    public bool TryShowEvent()
     {
         if (EventPanel.activeSelf == false)
         {

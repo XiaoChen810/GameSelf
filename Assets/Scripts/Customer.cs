@@ -116,7 +116,7 @@ public class Customer : MonoBehaviour
 
         // 开启耐心值协程
         patience = patienceMax;
-        StartCoroutine(PatientCo());
+        // StartCoroutine(PatientCo());
         
         // 订阅事件
         Statistics.Instance.OnDayDark += DateDark;
@@ -175,16 +175,39 @@ public class Customer : MonoBehaviour
         Selected();
 
         // UI更新
-        // 聊天气泡的方向
-        chatBubble.transform.localScale = new Vector3(
-            Mathf.Abs(chatBubble.transform.localScale.x) * body.localScale.x,
-            chatBubble.transform.localScale.y,
-            chatBubble.transform.localScale.z
-            );
+        //// 聊天气泡的方向
+        //chatBubble.transform.localScale = new Vector3(
+        //    Mathf.Abs(chatBubble.transform.localScale.x) * body.localScale.x,
+        //    chatBubble.transform.localScale.y,
+        //    chatBubble.transform.localScale.z
+        //    );
 
-        if(isClickAccept && Player.Instance.state != Player.State.ToCustomer)
+        if (isClickAccept && Player.Instance.state != Player.State.ToCustomer)
         {
             isClickAccept = false;
+        }
+
+        PatienceUpdate();
+    }
+
+    private void PatienceUpdate()
+    {
+        // 在非奔跑状态，即等待玩家过来时的状态，耐心值会减
+        // 再订单完成后，不会减少
+        if (!anim.GetBool("Running") && !m_order.isFinish)
+        {
+            patience -= Time.deltaTime;
+            // 耐心条更新
+            PatienceSlider.value = patience / patienceMax;
+            // 订单的耐心也更新
+            m_order.patience = patience / patienceMax;
+        }
+
+        PatienceSliderFillImage.color = patience / patienceMax <= 0.3f ? red : green;
+
+        if (patience < 0)
+        {
+            MyOrderPanel.SetActive(false);
         }
     }
 
@@ -239,7 +262,7 @@ public class Customer : MonoBehaviour
     private void MoveToTarget(Vector2 target)
     {
         float distance = Mathf.Abs(transform.position.x - target.x);
-        if (Mathf.Abs(transform.position.x - target.x) > 0.1f)
+        if (distance > 0.1f)
         {
             anim.SetBool("Running", true);
             Vector2 dir = new Vector2(target.x - transform.position.x, 0);

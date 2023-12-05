@@ -13,9 +13,9 @@ public class ShopPanel : MonoBehaviour
     public void ClickCloseButton()
     {
         gameObject.SetActive(false);
-        goods1.gameObject.SetActive(true); 
-        goods2.gameObject.SetActive(true);
-        goods3.gameObject.SetActive(true);
-        goods4.gameObject.SetActive(true);
+        goods1.gameObject.SetActive(!goods1.isBuy); 
+        goods2.gameObject.SetActive(!goods2.isBuy);
+        goods3.gameObject.SetActive(!goods3.isBuy);
+        goods4.gameObject.SetActive(!goods4.isBuy);
     }
 }

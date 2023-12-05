@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour
                 transform.position = new Vector3(player.transform.position.x, 0, 0);
             }
 
+            // 玩家在室内
             if (Player.Instance.isIndoor)
             {
                 Lock = true;
@@ -39,6 +40,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
+            // 玩家在室外
             if (!Player.Instance.isIndoor)
             {
                 Lock = false;

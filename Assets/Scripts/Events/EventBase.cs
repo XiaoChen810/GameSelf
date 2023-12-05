@@ -58,19 +58,20 @@ public abstract class EventBase : MonoBehaviour,IEvent
     /// </summary>
     public virtual void OnShow()
     {
-        if(GameManager.Instance.EventPanel.activeSelf)
+        isShow = GameManager.Instance.TryShowEvent();
+        if (isShow)
         {
-            isShow = false;
+            GameManager.Instance.HeaderText.text = _headerName;
+            GameManager.Instance.DescriptionText.text = _description;
+            GameManager.Instance.AcceptBtn.onClick.RemoveAllListeners();
+            GameManager.Instance.AcceptBtn.onClick.AddListener(OnAccept);
+            GameManager.Instance.CancelBtn.onClick.RemoveAllListeners();
+            GameManager.Instance.CancelBtn.onClick.AddListener(OnCancel);
+        }
+        else
+        {
             return;
         }
-        GameManager.Instance.HeaderText.text = _headerName;
-        GameManager.Instance.DescriptionText.text = _description;
-        GameManager.Instance.AcceptBtn.onClick.RemoveAllListeners();
-        GameManager.Instance.AcceptBtn.onClick.AddListener(OnAccept);
-        GameManager.Instance.CancelBtn.onClick.RemoveAllListeners();
-        GameManager.Instance.CancelBtn.onClick.AddListener(OnCancel);
-        isShow = GameManager.Instance.ShowEvent();
-
     }
 
     /// <summary>
