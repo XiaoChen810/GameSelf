@@ -24,6 +24,14 @@ public class StatisticsPanel : MonoBehaviour
 
     private void Start()
     {
+        Gold = transform.Find("Gold").GetComponentInChildren<Text>();
+        Wood = transform.Find("wooden").GetComponentInChildren<Text>();
+        Iron = transform.Find("Iron").GetComponentInChildren<Text>();
+        Brics = transform.Find("Brics").GetComponentInChildren<Text>();
+        Satiety = transform.Find("Satiety").GetComponentInChildren<Slider>();
+        Energy = transform.Find("Energy").GetComponentInChildren<Slider>();
+        Date = transform.Find("Date").GetComponentInChildren<Text>();
+
         ToNextDateBtn.onClick.RemoveAllListeners();
         ToNextDateBtn.onClick.AddListener(Statistics.Instance.ToNextDate);
     }

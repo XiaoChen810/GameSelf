@@ -167,10 +167,11 @@ public class Statistics : MonoBehaviour
     {
         Instance = this;
 
-        LoadData();
-
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        statisticsPanel = GameObject.Find("StatisticsPanel").GetComponent<StatisticsPanel>();
+
+        LoadData();
 
         LastDate = Date;
 
@@ -184,6 +185,8 @@ public class Statistics : MonoBehaviour
 
         GoldClip = Resources.Load<AudioClip>("Audio/收获金币音效");
         NextDayClip = Resources.Load<AudioClip>("Audio/下一天音效");
+
+
     }
 
     private void OnApplicationQuit()
@@ -224,26 +227,60 @@ public class Statistics : MonoBehaviour
 
     #region Save And Load
 
+    [System.Serializable]
+    public class Data
+    { 
+        public float Gold;
+        public float Wood;
+        public float Iron;
+        public float Brics;
+        public float Satiety;
+        public float Energy;
+        public float Date;
+
+        public Data(float gold, float wood, float iron, float brics, float satiety, float energy, float date)
+        {
+            Gold = gold;
+            Wood = wood;
+            Iron = iron;
+            Brics = brics;
+            Satiety = satiety;
+            Energy = energy;
+            Date = date;
+        }
+    }
+
     private void SaveData()
     {
-        PlayerPrefs.SetFloat("Gold", Gold);
-        PlayerPrefs.SetFloat("Wooden", Wood);
-        PlayerPrefs.SetFloat("Iron", Iron);
-        PlayerPrefs.SetFloat("Brics", Brics);
-        PlayerPrefs.SetFloat("Satiety", Satiety);
-        PlayerPrefs.SetFloat("Energy",Energy);
-        PlayerPrefs.SetFloat("Date", Date);
+        Data data = new Data(Gold, Wood, Iron, Brics, Satiety, Energy, Date);
+        DataSystem.Save("Statistics", data);
+
+        //PlayerPrefs.SetFloat("Gold", Gold);
+        //PlayerPrefs.SetFloat("Wooden", Wood);
+        //PlayerPrefs.SetFloat("Iron", Iron);
+        //PlayerPrefs.SetFloat("Brics", Brics);
+        //PlayerPrefs.SetFloat("Satiety", Satiety);
+        //PlayerPrefs.SetFloat("Energy",Energy);
+        //PlayerPrefs.SetFloat("Date", Date);
     }
 
     private void LoadData()
     {
-        Gold = PlayerPrefs.GetFloat("Gold",0);
-        Wood = PlayerPrefs.GetFloat("Wooden",0);
-        Iron = PlayerPrefs.GetFloat("Iron",10);
-        Brics = PlayerPrefs.GetFloat("Brics", 0);
-        Satiety = PlayerPrefs.GetFloat("Satiety",SatietyMax);
-        Energy = PlayerPrefs.GetFloat("Energy",EnergyMax);
-        Date = PlayerPrefs.GetFloat("Date", 0);
+        Data data = DataSystem.Load<Data>("Statistics");
+        Gold = data.Gold;
+        Wood = data.Wood;
+        Iron = data.Iron;
+        Brics = data.Brics;
+        Satiety = data.Satiety;
+        Energy = data.Energy;
+        Date = data.Date;
+        //Gold = PlayerPrefs.GetFloat("Gold",0);
+        //Wood = PlayerPrefs.GetFloat("Wooden",0);
+        //Iron = PlayerPrefs.GetFloat("Iron",10);
+        //Brics = PlayerPrefs.GetFloat("Brics", 0);
+        //Satiety = PlayerPrefs.GetFloat("Satiety",SatietyMax);
+        //Energy = PlayerPrefs.GetFloat("Energy",EnergyMax);
+        //Date = PlayerPrefs.GetFloat("Date", 0);
     }
 
 #if UNITY_EDITOR

@@ -888,6 +888,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   price: 50
@@ -1380,6 +1381,7 @@ MonoBehaviour:
   isHasProtective: 1
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   price: 30
@@ -2196,6 +2198,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
 --- !u!1 &813491091
@@ -2394,6 +2397,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
 --- !u!1 &826438430
@@ -2956,6 +2960,7 @@ MonoBehaviour:
   isHasProtective: 1
   deadline: 3
   isOnlyOneTrigger: 1
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
 --- !u!82 &1073887369
@@ -3343,6 +3348,7 @@ MonoBehaviour:
   isHasProtective: 1
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   mineCaves: {fileID: 1713854510}
@@ -3660,6 +3666,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   begGold: 10
@@ -3718,6 +3725,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   order:
@@ -4236,6 +4244,7 @@ MonoBehaviour:
   isHasProtective: 1
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   need: 50
@@ -4390,6 +4399,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   taxation: 50
@@ -4484,6 +4494,7 @@ MonoBehaviour:
   isHasProtective: 1
   deadline: 3
   isOnlyOneTrigger: 1
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   BankruptLine: -200
@@ -4734,6 +4745,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 1
+  isHasPreEvent: 0
   _preEventName: FirstDay
   isShow: 0
   victoryPrice: 200
@@ -4791,6 +4803,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 1
+  isHasPreEvent: 0
   _preEventName: BuildHouseGoals
   isShow: 0
 --- !u!82 &1709108777
@@ -4954,6 +4967,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 1
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   reward: 50
@@ -5452,6 +5466,7 @@ MonoBehaviour:
   isHasProtective: 1
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   stealGold: 50
@@ -5816,6 +5831,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 0
+  isHasPreEvent: 0
   _preEventName: 
   isShow: 0
   order:
@@ -5981,6 +5997,7 @@ MonoBehaviour:
   isHasProtective: 0
   deadline: 3
   isOnlyOneTrigger: 1
+  isHasPreEvent: 0
   _preEventName: Victory
   isShow: 0
 --- !u!82 &2020112961
@@ -6195,15 +6212,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  statisticsPanel: {fileID: 0}
   _gold: 0
-  Wood: 0
-  Iron: 10
-  Brics: 0
-  Satiety: 540
+  _wood: 0
+  _iron: 0
+  _brics: 0
+  _satiety: 0
   SatietyMax: 540
-  Energy: 100
+  _energy: 0
   EnergyMax: 100
-  Date: 0
+  _date: 0
   TimeScale: 180
   Second: 0
   isUpdating: 0
@@ -6813,14 +6831,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6143821302416141485, guid: 041176da81141ac43b6fc7d0f6e088ae, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -211
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143821302416141485, guid: 041176da81141ac43b6fc7d0f6e088ae, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -45.339966
-      objectReference: {fileID: 0}
     - target: {fileID: 6512062164980971811, guid: 041176da81141ac43b6fc7d0f6e088ae, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -6925,7 +6935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3788648150156653249, guid: 3f583886b3b55b04c8cd0d6273097bbd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 28.997986
+      value: 28.998047
       objectReference: {fileID: 0}
     - target: {fileID: 3788648150156653249, guid: 3f583886b3b55b04c8cd0d6273097bbd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7022,7 +7032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 274311498766827378, guid: 591232eac822017469a78f70beafbb4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.789978
+      value: 27.79004
       objectReference: {fileID: 0}
     - target: {fileID: 274311498766827378, guid: 591232eac822017469a78f70beafbb4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7220,7 +7230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8371846479596288681, guid: 44913a862d177304dba5f19430ebc31a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.789978
+      value: 27.79004
       objectReference: {fileID: 0}
     - target: {fileID: 8371846479596288681, guid: 44913a862d177304dba5f19430ebc31a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

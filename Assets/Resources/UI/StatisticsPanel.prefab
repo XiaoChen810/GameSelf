@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -117.910034, y: -45.339996}
+  m_AnchoredPosition: {x: -211, y: -45.339966}
   m_SizeDelta: {x: 235.82, y: 90.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2950506428757576611
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gold: {fileID: 4929790428424820204}
-  Wooden: {fileID: 2083191331561165059}
+  Wood: {fileID: 2083191331561165059}
   Iron: {fileID: 5883463909987506236}
   Brics: {fileID: 297285784809476566}
   Satiety: {fileID: 5725973880136682414}

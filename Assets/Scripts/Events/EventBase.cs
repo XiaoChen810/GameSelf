@@ -21,17 +21,18 @@ public abstract class EventBase : MonoBehaviour,IEvent
     [Header("是否只触发一次")]
     [SerializeField] protected bool isOnlyOneTrigger;
 
-    [Header("前置事件名称")]
+    [Header("是否有前置事件名称")]
+    [SerializeField] protected bool isHasPreEvent;
     [SerializeField] protected string _preEventName;
 
-    public bool isShow = false;
+    
+    [HideInInspector] public bool isShow = false;
 
     protected AudioSource audioSource;
     protected AudioClip BtnClip;
 
     // 欠税次数
     protected float _taxationNoPayNum = 0;
-
 
     public string HeaderName { get { return _headerName; } }
 
@@ -67,6 +68,10 @@ public abstract class EventBase : MonoBehaviour,IEvent
             GameManager.Instance.AcceptBtn.onClick.AddListener(OnAccept);
             GameManager.Instance.CancelBtn.onClick.RemoveAllListeners();
             GameManager.Instance.CancelBtn.onClick.AddListener(OnCancel);
+
+            // 添加进字典
+            if (!EventManager.Instance.preEventDict.ContainsValue(this))
+                EventManager.Instance.preEventDict.Add(name, this);
         }
         else
         {
@@ -80,6 +85,7 @@ public abstract class EventBase : MonoBehaviour,IEvent
     /// <returns></returns>
     public virtual bool TriggerConditions()
     {
+        // 概率触发时
         if(_probabilisticEvent.IsProbabilistic)
         {
             if (_probabilisticEvent.Probability > todyProbabilityParameter)
@@ -92,9 +98,29 @@ public abstract class EventBase : MonoBehaviour,IEvent
             }
         }
 
+        // 有新手保护期时
+        if (isHasProtective)
+        {
+            if (Statistics.Instance.Date < deadline)
+            {
+                return false;
+            }
+        }
+
+        // 通用逻辑
+
         Debug.LogWarning("触发了错误，导致事件判断返回False");
         return false;
     }
+
+    #region 通用逻辑
+
+    protected bool GreaterThan()
+    {
+        return false;
+    }
+
+    #endregion
 
     /// <summary>
     /// 当重置时
@@ -131,15 +157,6 @@ public abstract class EventBase : MonoBehaviour,IEvent
 
     protected void Update()
     {
-        // 保护期限
-        if (isHasProtective)
-        {
-            if(Statistics.Instance.Date < deadline)
-            {
-                return;
-            }
-        }
-
         // 打开时不判断，更新时不判断
         if (!isShow && !Statistics.Instance.isUpdating)
         {
@@ -149,6 +166,5 @@ public abstract class EventBase : MonoBehaviour,IEvent
                 OnShow();
             }
         }
-
     }
 }

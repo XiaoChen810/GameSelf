@@ -164,7 +164,6 @@ public class GameManager : MonoBehaviour
 
             if(range < total)
             {
-                Debug.Log($"返回了第{index}个");
                 return CustomerPrefabsList[index];
             }
 
